@@ -29,6 +29,7 @@ var app = app || {};
 		// loading any preexisting todos that might be saved in *localStorage*.
 		initialize: function () {
 			this.allCheckbox = this.$('.toggle-all')[0];
+			console.log('INITIALIZE >\n this.allCheckbox.checked:', this.allCheckbox.checked)
 			this.$input = this.$('.new-todo');
 			this.$footer = this.$('.footer');
 			this.$main = this.$('.main');
@@ -49,10 +50,10 @@ var app = app || {};
 		// Re-rendering the App just means refreshing the statistics -- the rest
 		// of the app doesn't change.
 		render: function () {
-      
+
 			var completed = app.todos.completed().length;
 			var remaining = app.todos.remaining().length;
-console.log("remaining", remaining )
+			console.log("RENDER>\nremaining:", remaining )
 			if (app.todos.length) {
 				this.$main.show();
 				this.$footer.show();
@@ -70,9 +71,13 @@ console.log("remaining", remaining )
 				this.$main.hide();
 				this.$footer.hide();
 			}
-
+			console.log('BEFORE this.allCheckbox.checked = !remaining >',
+			'\n this.allCheckbox.checked: ', this.allCheckbox.checked,
+			'\n !remaining: ',!remaining);
 			this.allCheckbox.checked = !remaining;
-			console.log("!remaining: ",!remaining);
+			console.log('AFTER this.allCheckbox.checked = !remaining >',
+			'\n this.allCheckbox.checked: ', this.allCheckbox.checked,
+			'\n !remaining: ',!remaining);
 		},
 
 		// Add a single todo item to the list by creating a view for it, and
@@ -121,8 +126,8 @@ console.log("remaining", remaining )
 		},
 
 		toggleAllComplete: function () {
-      console.log("COMPLETE TOGGLE CLICKED");
-      console.log("this.allCheckbox.checked:", this.allCheckbox.checked);
+			console.log('ON ALL COMPLETE TOGGLE >',
+			'\n this.allCheckbox.checked: ', this.allCheckbox.checked);
 			var completed = this.allCheckbox.checked;
 
 			app.todos.each(function (todo) {
