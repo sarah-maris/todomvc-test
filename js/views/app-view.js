@@ -34,6 +34,8 @@ var app = app || {};
 			this.$footer = this.$('.footer');
 			this.$main = this.$('.main');
 			this.$list = $('.todo-list');
+			this.remaining = app.todos.remaining().length;
+			this.allCheckbox.checked = !this.remaining;
 
 			this.listenTo(app.todos, 'add', this.addOne);
 			this.listenTo(app.todos, 'reset', this.addAll);
@@ -52,7 +54,7 @@ var app = app || {};
 		render: function () {
 
 			var completed = app.todos.completed().length;
-			var remaining = app.todos.remaining().length;
+			var remaining = this.remaining;
 			console.log("RENDER>\nremaining:", remaining )
 			if (app.todos.length) {
 				this.$main.show();
@@ -74,10 +76,11 @@ var app = app || {};
 			console.log('BEFORE this.allCheckbox.checked = !remaining >',
 			'\n this.allCheckbox.checked: ', this.allCheckbox.checked,
 			'\n !remaining: ',!remaining);
-			this.allCheckbox.checked = !remaining;
+			/*this.allCheckbox.checked = !remaining;
 			console.log('AFTER this.allCheckbox.checked = !remaining >',
 			'\n this.allCheckbox.checked: ', this.allCheckbox.checked,
-			'\n !remaining: ',!remaining);
+			'\n !remaining: ',!remaining);*/
+			console.log('this.allCheckbox.checked = !remaining NOT RUN');
 		},
 
 		// Add a single todo item to the list by creating a view for it, and
